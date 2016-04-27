@@ -3,11 +3,6 @@
 #trial and development.
 
 #####################################################################################################################
-
-
-
-
-
 Traj_monkeys<-function(XYini, Vtray,Atray, Tcam, Tcom, Tdesc,Tdig, XYseed, perm, Tsimul,radio, Tday, Tnuit, directorio, file) 
 {
 setwd(directorio)
