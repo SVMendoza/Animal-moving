@@ -68,7 +68,7 @@ for(j in 1:perm) ##número de ciclos
      while(Per) # ciclo del día
         {
 
-#Alimento
+
                   TablaXY[i,2]<-X1
                   TablaXY[i,3]<-Y1
                   Tc<-sample(as.vector(Tcom), 1, replace =T)##extrayendo el tiempo de comer
@@ -196,7 +196,7 @@ for(j in 1:perm) ##número de ciclos
                               }
                    ###############################################################################################################
 
-## Preguntar si tiempo del día es mayor a 720 que duerma marque si hay semillas o que luego siga
+
       if(Td>Tday)
                 {
                 Per1<-Per1+Tnuit
@@ -226,7 +226,7 @@ for(j in 1:perm) ##número de ciclos
 
 Tdesc1<-sample(as.vector(Tdesc),1,replace =T)#descansa
 Td<-Td+Tdesc1 ; Per1<-Per1+Tdesc1
-## Preguntar si tiempo del día es mayor a 720 que duerma marque si hay semillas o que luego siga
+
       if(Td>Tday)
                 {
                 Per1<-Per1+Tnuit
@@ -260,7 +260,6 @@ Td<-Td+Tdesc1 ; Per1<-Per1+Tdesc1
        X1<-TablaXY[i,2]+cos(A)*Dis
        Y1<-TablaXY[i,3]+sin(A)*Dis
 
-## Preguntar si tiempo del da es mayor a 720 que duerma marque si hay semillas o que luego siga
       if(Td>Tday)
                 {
                 Per1<-Per1+Tnuit
