@@ -3,7 +3,12 @@
 #trial and development.
 
 #####################################################################################################################
-Traj_monkeys<-function(XYini, Vtray,Atray, Tcam, Tcom, Tdesc,Tdig, XYseed, perm, Tsimul,radio, Tday, Tnuit, directorio, file)      #XY, perm,ANG,tiempo,velocidad, ncoord, Semillas
+
+
+
+
+
+Traj_monkeys<-function(XYini, Vtray,Atray, Tcam, Tcom, Tdesc,Tdig, XYseed, perm, Tsimul,radio, Tday, Tnuit, directorio, file) 
 {
 setwd(directorio)
 TablaG<-list()
@@ -43,9 +48,6 @@ for(j in 1:perm) ##número de ciclos
     Tdesc1<-c()# tiempo de descanso extraído  por el sample
     Tca<-c() #Tiempo de caminata
     Tpar<-c()
-    ############################################################################################################
-
-
     Tres<-c() #tiempo restante del recorrido en el día
               Vt<-sample(as.vector(Vtray), 1,replace =T) ##  extrayendo la velocidad de trayectoria
               A<-sample(as.vector(Atray), 1,replace =T)   #extrayendo el ángulo de la trayectoria
@@ -54,44 +56,35 @@ for(j in 1:perm) ##número de ciclos
               X1<-Xini+cos(A)*Dis  #generando las coordenadas en posición final del desplazamiento
               Y1<-Yini+sin(A)*Dis
               Td<-Tca
-
-
-
-    Per1<-Tca
+   Per1<-Tca
     Tpar<-1#Tiempo de parada
     TDig<-0
     index<-c()
-
-     i<-1
+    i<-1
    Per<-Per1<Tsimul  # valor lógico de parada para el bucle que se genera por día
-
-     while(Per) # ciclo del día
+    while(Per) # ciclo del día
         {
-
-
-                  TablaXY[i,2]<-X1
+                 TablaXY[i,2]<-X1
                   TablaXY[i,3]<-Y1
                   Tc<-sample(as.vector(Tcom), 1, replace =T)##extrayendo el tiempo de comer
                   Td<-Td+Tc  #estimando el tiempo del día que se ha realizado
                   Per1<-Per1+Tc
-
-                                            Dseed<-sqrt((TablaXY[i,2]-XYseed[,1])^2+(TablaXY[i,3]-XYseed[,2])^2) #valores menos las coord tabla de semillas
+                                           Dseed<-sqrt((TablaXY[i,2]-XYseed[,1])^2+(TablaXY[i,3]-XYseed[,2])^2) 
                                             if(min(Dseed)>100){
                                              #SI HAY SALIDA DEL AREA DE ESTUDIO
-                                                X1<-TablaXY[i,2]+cos(A)*(1.5*-Dis)  #generando las coordenadas en posición final del desplazamiento
-                                                Y1<-TablaXY[i,3]+sin(A)*(1.5*-Dis)
+                                                X1<-TablaXY[i,2]+cos(A)*(1.5*-Dis)                                                 Y1<-TablaXY[i,3]+sin(A)*(1.5*-Dis)
                                                 TablaXY[i,2]<-X1
                                                 TablaXY[i,3]<-Y1
-                                                Dseed<-sqrt((TablaXY[i,2]-XYseed[,1])^2+(TablaXY[i,3]-XYseed[,2])^2) #valores menos las coord tabla de semillas
-                                                  l<-XYseed[Dseed<=radio,3]
+                                                Dseed<-sqrt((TablaXY[i,2]-XYseed[,1])^2+(TablaXY[i,3]-XYseed[,2])^2) 
+                                                
+                                              l<-XYseed[Dseed<=radio,3]
                                                    if(min(Dseed)>100){
                                              #SI HAY SALIDA DEL AREA DE ESTUDIO
-                                                X1<-TablaXY[i,2]+cos(A)*(1.5*-Dis)  #generando las coordenadas en posición final del desplazamiento
+                                                X1<-TablaXY[i,2]+cos(A)*(1.5*-Dis)  
                                                 Y1<-TablaXY[i,3]+sin(A)*(1.5*-Dis)
                                                 TablaXY[i,2]<-X1
                                                 TablaXY[i,3]<-Y1
-                                                Dseed<-sqrt((TablaXY[i,2]-XYseed[,1])^2+(TablaXY[i,3]-XYseed[,2])^2) #valores menos las coord tabla de semillas
-                                                  l<-XYseed[Dseed<=radio,3]
+                                                Dseed<-sqrt((TablaXY[i,2]-XYseed[,1])^2+(TablaXY[i,3]-XYseed[,2])^2)            l<-XYseed[Dseed<=radio,3]
                                                                      }
                                                       else {
 
@@ -99,17 +92,13 @@ for(j in 1:perm) ##número de ciclos
                                                             }
                                                                 }
 
-                                            l<-XYseed[Dseed<=radio,3]      #sacando el número de semillas en el radio indicado
-
-
+                                            l<-XYseed[Dseed<=radio,3]      
 
                                             if(is.null(l1))
                                                {
 
-                                                          l1<- sum(na.omit(l)/length(l)) #Sancando un valor promedio por si quedan varios pixeles
-
-                                               TDig<-sample(as.vector(Tdig),1,replace =T) #condicionando si hay semillas para estimar el tiempo de digestion
-                                               Tpar<-Td+TDig
+                                                          l1<- sum(na.omit(l)/length(l)) 
+                                               TDig<-sample(as.vector(Tdig),1,replace =T)                                                Tpar<-Td+TDig
                                                index<-i
                                                TablaXY[i,1]<-index
                                                TablaXY[i,2]<-X1
@@ -127,8 +116,7 @@ for(j in 1:perm) ##número de ciclos
                             if(!is.na(l1))# pregunta si el tiempo de digestión es menor que el periodo del día
                                              {
                                     if((Tpar<Tday)){
-                                             #estimando el tiempo de digestión
-
+ 
                                         Tres<-TDig>1
                                         p<-i
                                    while(Tres){
@@ -194,10 +182,7 @@ for(j in 1:perm) ##número de ciclos
                               }
                               }
                               }
-                   ###############################################################################################################
-
-
-      if(Td>Tday)
+     if(Td>Tday)
                 {
                 Per1<-Per1+Tnuit
              if(!is.null(l1))
